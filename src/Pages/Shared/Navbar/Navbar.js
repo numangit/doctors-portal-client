@@ -13,7 +13,7 @@ const Navbar = () => {
     </React.Fragment>
     return (
         <div>
-            <div className="navbar bg-base-100">
+            <div className="navbar bg-base-100 flex justify-between">
                 <div className="navbar-start">
                     {/* small screen */}
                     <div className="dropdown">
