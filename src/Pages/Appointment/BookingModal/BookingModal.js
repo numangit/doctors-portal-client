@@ -13,7 +13,6 @@ const BookingModal = ({ treatment, setTreatment, selectedDate }) => {
         const name = form.name.value;
         const email = form.email.value;
         const phone = form.phone.value;
-        // [3, 4, 5].map((value, i) => console.log(value))
         const booking = {
             appointmentDate: date,
             treatment: name,
