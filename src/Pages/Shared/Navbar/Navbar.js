@@ -12,7 +12,7 @@ const Navbar = () => {
         <li><Link to="/login">Login</Link></li>
     </React.Fragment>
     return (
-        <div>
+        <div className='sticky top-0 z-50'>
             <div className="navbar bg-base-100 flex justify-between">
                 <div className="navbar-start">
                     {/* small screen */}
