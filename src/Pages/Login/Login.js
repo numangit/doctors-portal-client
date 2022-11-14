@@ -5,7 +5,7 @@ import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const { signIn, googleSignIn, setLoading } = useContext(AuthContext)
+    const { signIn, googleSignIn, setLoading, passwordReset } = useContext(AuthContext)
     const [loginError, setLoginError] = useState('');
     const location = useLocation();
     const navigate = useNavigate();
@@ -38,6 +38,18 @@ const Login = () => {
             });
     }
 
+    const handlePasswordReset = (e) => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        passwordReset(email)
+            .then(() => {
+                console.log('email sent');
+            })
+            .catch((error) => {
+                const errorMessage = error.message;
+                console.log(errorMessage);
+            });
+    }
 
     //REMINDER: you will need to install react hook form to use this kind of form.
     //stop and restart the react app if the error handling does'nt work.
@@ -62,14 +74,41 @@ const Login = () => {
                         })}
                         type="password" className="input input-bordered w-full" />
                     {errors.password && <p className="text-red-500 text-sm" role="alert">{errors.password?.message}</p>}
-                    <label className="label my-1"><span className="label-text">Forget Password?</span></label>
+                    <label htmlFor="my-modal-4" className="label my-1"><span className="label-text">Forget Password?</span></label>
                 </div>
                 <input className='btn btn-accent w-full' value="Login" type="submit" />
-            </form>
+            </form >
             <p className="text-sm my-1">New to Doctors Portal? <Link className="text-secondary" to="/signup">Create new account</Link></p>
             <div className="divider">OR</div>
             <button onClick={handleGoogleSignIn} className="btn btn-outline w-full">CONTINUE WITH GOOGLE</button>
-        </div>
+
+            {/* modal */}
+            {/* <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+            <div className="modal">
+                <div className="modal-box relative">
+                    <label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <h3 className="font-bold text-lg">Please enter your email</h3>
+                    <form onSubmit={handlePasswordReset} >
+                        <div className="form-control w-full ">
+                            <input name="email" type="email" className="input input-bordered w-full my-2" placeholder='Your email' />
+                        </div>
+                        <button className="btn mx-auto w-full" type="submit">Send</button>
+                    </form>
+                </div>
+            </div> */}
+            <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+            <label htmlFor="my-modal-4" className="modal cursor-pointer">
+                <label className="modal-box relative" htmlFor="">
+                    <h3 className="font-bold text-lg text-center ">Please enter your email</h3>
+                    <form onSubmit={handlePasswordReset} >
+                        <div className="form-control w-full ">
+                            <input name="email" type="email" className="input input-bordered w-full my-2" placeholder='Your email' />
+                        </div>
+                        <button className="btn mx-auto w-full" type="submit">Send</button>
+                    </form>
+                </label>
+            </label>
+        </div >
     );
 };
 
