@@ -8,7 +8,7 @@ const Login = () => {
     const handleLogin = data => {
         console.log(data)
     }
-
+    //REMINDER: you will need to install react-form to use this kind of form.
     return (
         <div className="shadow-md p-10 mx-2 lg:mx-auto w-full lg:w-96 rounded-xl my-5 lg:my-28 border">
             <h2 className="text-xl text-center font-bold my-3">Login</h2>
