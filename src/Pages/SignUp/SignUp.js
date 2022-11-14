@@ -1,18 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
+import toast from 'react-hot-toast';
+
 
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { createUser, updateUser } = useContext(AuthContext);
+    const [signUpError, setSignUPError] = useState('')
 
     const handleSignUp = data => {
         console.log(data)
+        setSignUPError('');
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                toast('User created successfully')
                 const userInfo = {
                     displayName: data.name
                 }
@@ -22,6 +27,7 @@ const SignUp = () => {
             })
             .catch(error => {
                 console.log(error)
+                setSignUPError(error.message)
             });
     }
     //REMINDER: you will need to install react hook form to use this kind of form.
@@ -30,6 +36,9 @@ const SignUp = () => {
         <div className="shadow-md p-10 mx-2 lg:mx-auto w-full lg:w-96 rounded-xl my-5 lg:my-24 border">
             <h2 className="text-xl text-center font-bold my-3">SignUp</h2>
             <form onSubmit={handleSubmit(handleSignUp)}>
+                <div>
+                    {signUpError && <p className='text-red-600'>{signUpError.slice(22, -2)}</p>}
+                </div>
                 <div className="form-control w-full ">
                     <label className="label"><span className="">Name :</span></label>
                     <input {...register("name",
