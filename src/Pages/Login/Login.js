@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 
@@ -8,6 +8,7 @@ const Login = () => {
     const handleLogin = data => {
         console.log(data)
     }
+
     //REMINDER: you will need to install react hook form to use this kind of form.
     //stop and restart the react app if the error handling does'nt work.
     return (

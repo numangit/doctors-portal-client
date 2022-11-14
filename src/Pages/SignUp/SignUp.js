@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const { createUser, updateUser } = useContext(AuthContext);
 
     const handleSignUp = data => {
         console.log(data)
+        createUser(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                const userInfo = {
+                    displayName: data.name
+                }
+                updateUser(userInfo)
+                    .then(() => { })
+                    .catch(err => console.log(err));
+            })
+            .catch(error => {
+                console.log(error)
+            });
     }
     //REMINDER: you will need to install react hook form to use this kind of form.
     //stop and restart the react app if the error handling does'nt work.
