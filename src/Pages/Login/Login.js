@@ -5,7 +5,7 @@ import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const { signIn } = useContext(AuthContext)
+    const { signIn, googleSignIn, setLoading } = useContext(AuthContext)
     const [loginError, setLoginError] = useState('');
     const location = useLocation();
     const navigate = useNavigate();
@@ -26,6 +26,18 @@ const Login = () => {
                 setLoginError(error.message);
             });
     }
+
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then((result) => {
+                // const user = result.user;
+                navigate(from, { replace: true });
+                setLoading(false);
+            }).catch((error) => {
+                console.log(error.message);
+            });
+    }
+
 
     //REMINDER: you will need to install react hook form to use this kind of form.
     //stop and restart the react app if the error handling does'nt work.
@@ -56,7 +68,7 @@ const Login = () => {
             </form>
             <p className="text-sm my-1">New to Doctors Portal? <Link className="text-secondary" to="/signup">Create new account</Link></p>
             <div className="divider">OR</div>
-            <button className="btn btn-outline w-full">CONTINUE WITH GOOGLE</button>
+            <button onClick={handleGoogleSignIn} className="btn btn-outline w-full">CONTINUE WITH GOOGLE</button>
         </div>
     );
 };
