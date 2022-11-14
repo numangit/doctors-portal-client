@@ -13,6 +13,7 @@ const Navbar = () => {
 
     //Nav links (<></> and <React.Fragment> is same)
     const menuItems = <React.Fragment>
+        <li><input type="checkbox" className="toggle my-3 rounded-full" /></li>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/appointment">Appointment</Link></li>
         <li><Link to="/about">About</Link></li>
