@@ -1,12 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const { signIn } = useContext(AuthContext)
+    const [loginError, setLoginError] = useState('');
+    // const location = useLocation();
+    // const navigate = useNavigate();
 
     const handleLogin = data => {
         console.log(data)
+        setLoginError('');
+        signIn(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                // navigate(from, { replace: true });
+            })
+            .catch(error => {
+                console.log(error.message)
+                setLoginError(error.message);
+            });
     }
 
     //REMINDER: you will need to install react hook form to use this kind of form.
@@ -15,6 +31,9 @@ const Login = () => {
         <div className="shadow-md p-10 mx-2 lg:mx-auto w-full lg:w-96 rounded-xl my-5 lg:my-24 border">
             <h2 className="text-xl text-center font-bold my-3">Login</h2>
             <form onSubmit={handleSubmit(handleLogin)}>
+                <div>
+                    {loginError && <p className='text-red-600'>{loginError.slice(22, -2)}</p>}
+                </div>
                 <div className="form-control w-full ">
                     <label className="label"><span className="">Email :</span></label>
                     <input {...register("email", { required: "Email Address is required" })} type="email" className="input input-bordered w-full" />
