@@ -38,7 +38,7 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, provider)
     }
     const passwordReset = (email) => {
-        return sendPasswordResetEmail(auth)
+        return sendPasswordResetEmail(auth, email);
     }
 
     //setting observer
