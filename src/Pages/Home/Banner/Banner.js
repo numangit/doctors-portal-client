@@ -5,7 +5,7 @@ const Banner = () => {
     return (
         <div>
             {/* bg image added using tailwind */}
-            <div className="bg-[url('/src/assets/images/bg.png')] hero">
+            <div className="bg-[url('/src/assets/images/bg.png')] hero p-0">
                 <div className="hero-content flex-col lg:flex-row-reverse p-10 lg:p-16  my-10 lg:my-17">
                     <img src={chair} className="rounded-lg lg:w-1/2 shadow-2xl" alt="" />
                     <div>
