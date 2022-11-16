@@ -6,6 +6,7 @@ import AppointmentOption from './AppointmentOption';
 
 const AvailableAppointments = ({ selectedDate }) => {
     const [treatment, setTreatment] = useState(null);
+    const date = format(selectedDate, 'PP')
 
     //USE THIS OR
     // const [appointmentOptions, setAppointmentOptions] = useState([]);
@@ -25,10 +26,10 @@ const AvailableAppointments = ({ selectedDate }) => {
 
     //OR USE THIS
     //using TanStack Query using async await 
-    const { data: appointmentOptions = [] } = useQuery({
-        queryKey: ['appointmentOptions'],
+    const { data: appointmentOptions = [], refetch } = useQuery({
+        queryKey: ['appointmentOptions', date],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/appointmentOptions');
+            const res = await fetch(`http://localhost:5000/appointmentOptions?date=${date}`);
             const data = await res.json();
             return data;
         }
@@ -53,6 +54,7 @@ const AvailableAppointments = ({ selectedDate }) => {
                     selectedDate={selectedDate}
                     treatment={treatment}
                     setTreatment={setTreatment}
+                    refetch={refetch}
                 ></BookingModal>
             }
         </section>
