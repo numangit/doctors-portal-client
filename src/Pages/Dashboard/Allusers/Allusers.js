@@ -12,25 +12,25 @@ const AllUsers = () => {
         }
     });
 
-    // const handleMakeAdmin = id => {
-    //     fetch(`http://localhost:5000/users/admin/${id}`, {
-    //         method: 'PUT',
-    //         headers: {
-    //             authorization: `bearer ${localStorage.getItem('accessToken')}`
-    //         }
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             if (data.modifiedCount > 0) {
-    //                 toast.success('Make admin successful.')
-    //                 refetch();
-    //             }
-    //         })
-    // }
+    const handleMakeAdmin = id => {
+        fetch(`http://localhost:5000/users/admin/${id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    toast.success('User promoted to admin successful.')
+                    refetch();
+                }
+            })
+    }
 
     return (
-        <div>
-            <h2 className="text-3xl">All Users</h2>
+        <div className='mx-1'>
+            <h2 className="text-3xl mb-5">All Users</h2>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -48,7 +48,7 @@ const AllUsers = () => {
                                 <th>{i + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td><button className='btn btn-xs btn-primary'>Make Admin</button></td>
+                                <td>{user?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td>
                                 <td><button className='btn btn-xs btn-danger'>Delete</button></td>
                             </tr>)
                         }
