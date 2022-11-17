@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import toast from 'react-hot-toast';
-import useToken from '../../Hooks/useToken';
+import useToken from '../../hooks/useToken';
 
 
 const SignUp = () => {
@@ -56,6 +56,7 @@ const SignUp = () => {
         })
             .then(res => res.json())
             .then(data => {
+                console.log(data);
                 setCreatedUserEmail(email);
             })
     }
