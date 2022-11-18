@@ -13,6 +13,7 @@ const AdminRoute = ({ children }) => {
         return <Loading></Loading>
     }
 
+    //this will check if the use is admin, and if the user is logged in (user will obviously be logged in but just a double check)
     if (user && isAdmin) {
         return children;
     }
