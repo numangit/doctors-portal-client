@@ -15,10 +15,12 @@ const DisplayError = () => {
             .catch(err => console.log(err));
     }
     return (
-        <div className='flex justify-center items-center'>
-            <h3 className='text-5xl bg-red-600'>Oops Something Went Wrong!</h3>
-            <p className='text-red-400'>{error.statusText || error.message}</p>
-            <h4 className="text-3xl"> Please <button onClick={handleLogOut}>Sign out</button> and log back in</h4>
+        <div className='flex justify-center items-center h-screen'>
+            <div>
+                <h3 className='text-5xl text-primary font-bold'>Oops Something Went Wrong!</h3>
+                <p className='text-2xl'>Error : {error.statusText || error.message}</p>
+                <h4 className="text-2xl"> Please <button onClick={handleLogOut}>Sign out</button> and log back in</h4>
+            </div>
         </div>
     );
 };

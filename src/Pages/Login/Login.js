@@ -106,12 +106,13 @@ const Login = () => {
             <input type="checkbox" id="my-modal-4" className="modal-toggle" />
             <label htmlFor="my-modal-4" className="modal cursor-pointer">
                 <label className="modal-box relative" htmlFor="">
-                    <h3 className="font-bold text-lg text-center ">Please enter your email</h3>
-                    <form onSubmit={handlePasswordReset} >
-                        <div className="form-control w-full ">
+                    <h3 className="font-bold text-lg my-1">Reset your password</h3>
+                    <p>Enter the email address associated with your account and we'll send you a link to reset your password.</p>
+                    <form className="my-2" onSubmit={handlePasswordReset} >
+                        <div className="form-control w-full">
                             <input name="email" type="email" className="input input-bordered w-full my-2" placeholder='Your email' />
                         </div>
-                        <button className="btn mx-auto w-full" type="submit">Send</button>
+                        <button className="btn mx-auto w-full my-1" type="submit">Send</button>
                     </form>
                 </label>
             </label>
