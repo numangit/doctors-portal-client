@@ -39,7 +39,7 @@ const CheckoutForm = ({ booking }) => {
             return;
         }
 
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
+        const { error } = await stripe.createPaymentMethod({
             type: 'card',
             card
         });
@@ -70,6 +70,7 @@ const CheckoutForm = ({ booking }) => {
             setCardError(confirmError.message);
             return;
         }
+
         if (paymentIntent.status === "succeeded") {
             console.log('card info', card);
             // store payment info in the database
