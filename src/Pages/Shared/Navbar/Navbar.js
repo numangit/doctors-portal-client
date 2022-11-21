@@ -1,15 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
 
+    //function to handle logout
     const handleLogOut = () => {
         logOut()
             .then(() => { })
             .catch(err => console.log(err));
     }
+
+    //change nav color when scrolling
+    const [color, setColor] = useState(false);
+    useEffect(() => {
+        window.addEventListener('scroll', () => {
+            const yAxis = window.scrollY;
+            if (yAxis > 90) {
+                setColor(true);
+
+            } else {
+                setColor(false);
+            }
+        })
+    }, [])
 
     //function to toggle theme and save in local storage
     const toggleDarkMode = () => {
@@ -40,9 +55,11 @@ const Navbar = () => {
                 : <li><Link to="/login">Login</Link></li>
         }
     </React.Fragment>
+
     return (
         <div className='sticky top-0 z-50'>
-            <div className="navbar bg-base-100 flex justify-between dark:bg-slate-500">
+            {/* change nav color when scrolling conditional className */}
+            <div className={color ? "navbar bg-base-100 flex justify-between dark:bg-accent" : "navbar bg-teal-200 justify-between dark:bg-transparent"}>
                 <div className="navbar-start">
                     {/* small screen */}
                     <div className="dropdown">
