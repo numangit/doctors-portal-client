@@ -11,9 +11,23 @@ const Navbar = () => {
             .catch(err => console.log(err));
     }
 
+    //function to toggle theme and save in local storage
+    const toggleDarkMode = () => {
+        let htmlClasses = document.querySelector("html").classList;
+        if (localStorage.theme === "dark") {
+            htmlClasses.remove("dark");
+            localStorage.removeItem("theme");
+        } else {
+            htmlClasses.add("dark");
+            localStorage.setItem("theme", "dark");
+        }
+    };
+
     //Nav links (<></> and <React.Fragment> is same)
     const menuItems = <React.Fragment>
-        <li><input type="checkbox" className="toggle my-3 rounded-full" /></li>
+        <li onClick={toggleDarkMode}>
+            <input type="checkbox" className="toggle my-3 rounded-full" />
+        </li>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/appointment">Appointment</Link></li>
         <li><Link to="/about">About</Link></li>
@@ -28,7 +42,7 @@ const Navbar = () => {
     </React.Fragment>
     return (
         <div className='sticky top-0 z-50'>
-            <div className="navbar bg-base-100 flex justify-between">
+            <div className="navbar bg-base-100 flex justify-between dark:bg-slate-500">
                 <div className="navbar-start">
                     {/* small screen */}
                     <div className="dropdown">
