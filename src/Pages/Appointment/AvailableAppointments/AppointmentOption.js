@@ -3,7 +3,7 @@ import React from 'react';
 const AppointmentOption = ({ appointmentOption, setTreatment }) => {
     const { name, slots, price } = appointmentOption;
     return (
-        <div className="card shadow-xl">
+        <div className="card shadow-xl" data-aos="fade-up" data-aos-duration="500">
             <div className="card-body text-center">
                 <h2 className="text-2xl text-secondary font-bold text-center">{name}</h2>
                 <p>{slots.length > 0 ? slots[0] : 'Try Another day'}</p>

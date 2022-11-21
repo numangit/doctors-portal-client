@@ -32,7 +32,7 @@ const InfoCards = () => {
     ]
 
     return (
-        <div className='grid mt-8 gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-5'>
+        <div className='grid mt-8 gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-5' data-aos="fade-up" data-aos-duration="500">
             {
                 cardData.map(card => <InfoCard
                     key={card.id}
