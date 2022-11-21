@@ -14,7 +14,12 @@ const AppointmentBanner = ({ selectedDate, setSelectedDate }) => {
                         <DayPicker
                             mode='single'
                             selected={selectedDate}
-                            onSelect={setSelectedDate}
+                            // could have done this way onSelect={setSelectedDate}, but an error occurs if the date is clicked twice so to avoid that i have used the method below
+                            onSelect={(data => {
+                                if (data) {
+                                    setSelectedDate(data)
+                                }
+                            })}
                         />
                         <p className='text-center'>You picked {format(selectedDate, 'PP')}.</p>
                     </div>
