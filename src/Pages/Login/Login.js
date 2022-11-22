@@ -76,22 +76,22 @@ const Login = () => {
                     {loginError && <p className='text-red-600'>{loginError.slice(22, -2)}</p>}
                 </div>
                 <div className="form-control w-full ">
-                    <label className="label"><span className="">Email :</span></label>
-                    <input {...register("email", { required: "Email Address is required" })} type="email" className="input input-bordered w-full" />
+                    <label className="label"><span className=" dark:text-white ">Email :</span></label>
+                    <input {...register("email", { required: "Email Address is required" })} type="email" className="input input-bordered w-full dark:text-slate-900" />
                     {errors.email && <p className="text-red-500 text-sm" role="alert">{errors.email?.message}</p>}
                 </div>
                 <div className="form-control w-full">
-                    <label className="label"><span className="label-text">Password :</span></label>
+                    <label className="label"><span className="label-text dark:text-white">Password :</span></label>
                     <div className='relative'>
                         <input {...register("password",
                             {
                                 required: "Password is required",
                                 minLength: { value: 6, message: 'Password must be 6 characters or longer' }
                             })}
-                            type={passwordShown ? "text" : "password"} className="input input-bordered w-full" />
+                            type={passwordShown ? "text" : "password"} className="input input-bordered w-full  dark:text-slate-900" />
 
                         <div onClick={togglePassword}
-                            className="absolute inset-y-0 right-0 pr-3 flex items-center ">
+                            className="absolute inset-y-0 right-0 pr-3 flex items-center dark:text-slate-900 ">
                             <AiFillEye
                                 className={passwordShown ? 'hidden' : 'block'} />
                             <AiFillEyeInvisible
@@ -100,13 +100,13 @@ const Login = () => {
                     </div>
 
                     {errors.password && <p className="text-red-500 text-sm" role="alert">{errors.password?.message}</p>}
-                    <label htmlFor="my-modal-4" className="label my-1"><span className="label-text">Forget Password?</span></label>
+                    <label htmlFor="my-modal-4" className="label my-1"><span className="label-text  dark:text-white ">Forget Password?</span></label>
                 </div>
                 <input className='btn btn-accent w-full' value="Login" type="submit" />
             </form >
             <p className="text-sm my-1">New to Doctors Portal? <Link className="text-secondary" to="/signup">Create new account</Link></p>
             <div className="divider">OR</div>
-            <button onClick={handleGoogleSignIn} className="btn btn-outline w-full">CONTINUE WITH GOOGLE</button>
+            <button onClick={handleGoogleSignIn} className="btn btn-outline w-full dark:text-white">CONTINUE WITH GOOGLE</button>
 
             {/* modal */}
             {/* <input type="checkbox" id="my-modal-3" className="modal-toggle" />
@@ -124,7 +124,7 @@ const Login = () => {
             </div> */}
             <input type="checkbox" id="my-modal-4" className="modal-toggle" />
             <label htmlFor="my-modal-4" className="modal cursor-pointer">
-                <label className="modal-box relative" htmlFor="">
+                <label className="modal-box relative  dark:text-white dark:bg-slate-900" htmlFor="">
                     <h3 className="font-bold text-lg my-1">Reset your password</h3>
                     <p>Enter the email address associated with your account and we'll send you a link to reset your password.</p>
                     <form className="my-2" onSubmit={handlePasswordReset} >
