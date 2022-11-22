@@ -5,7 +5,7 @@ import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
-    <div className="max-w-[1440px] mx-auto dark:bg-slate-900 dark:text-white">
+    <div className="max-w-[1440px] mx-auto bg-[#f1ede5] dark:bg-slate-900 dark:text-white">
       <RouterProvider router={router}></RouterProvider>
       <Toaster />
     </div>
