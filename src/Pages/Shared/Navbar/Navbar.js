@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import { FaMoon, FaSun } from 'react-icons/fa';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -27,33 +28,54 @@ const Navbar = () => {
     }, [])
 
     //function to toggle theme and save in local storage
+    const [theme, setTheme] = useState('light')
     const toggleDarkMode = () => {
         let htmlClasses = document.querySelector("html").classList;
         if (localStorage.theme === "dark") {
             htmlClasses.remove("dark");
+            setTheme('light');
             localStorage.removeItem("theme");
         } else {
             htmlClasses.add("dark");
+            setTheme('dark');
             localStorage.setItem("theme", "dark");
         }
     };
 
     //Nav links (<></> and <React.Fragment> is same)
     const menuItems = <React.Fragment>
-        <li onClick={toggleDarkMode}>
+        {/* <li onClick={toggleDarkMode}>
             <input type="checkbox" className="toggle my-3 rounded-full" />
-        </li>
+        </li> */}
         <li><Link to="/">Home</Link></li>
         <li><Link to="/appointment">Appointment</Link></li>
         <li><Link to="/about">About</Link></li>
+
         {
             user?.uid ?
                 <>
                     <li><Link to="/dashboard">Dashboard</Link></li>
+                    <div class="h-auto m-0 p-0 bg-slate-700 w-[1px]"></div>
                     <li><button onClick={handleLogOut}>Sign Out</button></li>
                 </>
-                : <li><Link to="/login">Login</Link></li>
+                : <>
+                    <div class="h-auto m-0 p-0 bg-slate-700 w-[1px]"></div>
+                    <li><Link to="/login">Login</Link></li>
+                </>
         }
+        <li onClick={toggleDarkMode}>
+            <div className='transition ease-in-out duration-500 rounded-full p-2 '>
+                {theme === 'dark' ? (
+                    <FaSun
+                        className='text-gray-500 text-xl dark:text-gray-400 cursor-pointer'
+                    />
+                ) : (
+                    <FaMoon
+                        className='text-gray-500 text-xl dark:text-gray-400 cursor-pointer'
+                    />
+                )}
+            </div>
+        </li>
     </React.Fragment>
 
     return (
