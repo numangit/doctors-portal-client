@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import useToken from '../../hooks/useToken';
+import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -18,6 +19,13 @@ const Login = () => {
     if (token) {
         navigate(from, { replace: true });
     }
+
+
+    //show and hide password
+    const [passwordShown, setPasswordShown] = useState(false);
+    const togglePassword = () => {
+        setPasswordShown(!passwordShown);
+    };
 
     const handleLogin = data => {
         console.log(data)
@@ -74,12 +82,23 @@ const Login = () => {
                 </div>
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text">Password :</span></label>
-                    <input {...register("password",
-                        {
-                            required: "Password is required",
-                            minLength: { value: 6, message: 'Password must be 6 characters or longer' }
-                        })}
-                        type="password" className="input input-bordered w-full" />
+                    <div className='relative'>
+                        <input {...register("password",
+                            {
+                                required: "Password is required",
+                                minLength: { value: 6, message: 'Password must be 6 characters or longer' }
+                            })}
+                            type={passwordShown ? "text" : "password"} className="input input-bordered w-full" />
+
+                        <div onClick={togglePassword}
+                            className="absolute inset-y-0 right-0 pr-3 flex items-center ">
+                            <AiFillEye
+                                className={passwordShown ? 'hidden' : 'block'} />
+                            <AiFillEyeInvisible
+                                className={passwordShown ? 'block' : 'hidden'} />
+                        </div>
+                    </div>
+
                     {errors.password && <p className="text-red-500 text-sm" role="alert">{errors.password?.message}</p>}
                     <label htmlFor="my-modal-4" className="label my-1"><span className="label-text">Forget Password?</span></label>
                 </div>

@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import toast from 'react-hot-toast';
 import useToken from '../../hooks/useToken';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 
 const SignUp = () => {
@@ -21,6 +22,12 @@ const SignUp = () => {
         // navigate('/');
         navigate(from, { replace: true });
     }
+
+    //show and hide password
+    const [passwordShown, setPasswordShown] = useState(false);
+    const togglePassword = () => {
+        setPasswordShown(!passwordShown);
+    };
 
     const handleSignUp = data => {
         console.log(data)
@@ -75,7 +82,7 @@ const SignUp = () => {
     //REMINDER: you will need to install react hook form to use this kind of form.
     //stop and restart the react app if the error handling does'nt work.
     return (
-        <div className="shadow-md p-10 mx-2 lg:mx-auto w-full lg:w-96 rounded-xl my-5 lg:my-24 border">
+        <div className="shadow-md p-10 mx-2 lg:mx-auto w-full lg:w-96 rounded-xl my-5 lg:my-24 border text-dark">
             <h2 className="text-xl text-center font-bold my-3">SignUp</h2>
             <form onSubmit={handleSubmit(handleSignUp)}>
                 <div>
@@ -87,7 +94,7 @@ const SignUp = () => {
                         {//name validation and error handling 
                             required: "Name is required"
                         })}
-                        type="text" className="input input-bordered w-full" />
+                        type="text" className="input input-bordered w-full dark:text-black " />
                     {errors.name && <p className="text-red-500 text-sm" role="alert">{errors.name?.message}</p>}
                 </div>
                 <div className="form-control w-full ">
@@ -96,31 +103,40 @@ const SignUp = () => {
                         {//email validation and error handling 
                             required: "Email Address is required"
                         })}
-                        type="email" className="input input-bordered w-full" />
+                        type="email" className="input input-bordered w-full dark:text-black " />
                     {errors.email && <p className="text-red-500 text-sm" role="alert">{errors.email?.message}</p>}
                 </div>
                 <div className="form-control w-full">
-                    <label className="label"><span className="label-text">Password :</span></label>
-                    <input {...register("password",
-                        {//password validations and error handling 
-                            required: "Password is required",
-                            minLength: {
-                                value: 6,
-                                message: 'Password must be 6 characters or longer'
-                            },
-                            pattern: {
-                                value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/,
-                                message: 'Password must have uppercase, number and special characters'
-                            }
-                        })}
-                        type="password" className="input input-bordered w-full" />
+                    <label className="label dark:text-white"><span className="label-text dark:text-white">Password :</span></label>
+                    <div className='relative'>
+                        <input {...register("password",
+                            {//password validations and error handling 
+                                required: "Password is required",
+                                minLength: {
+                                    value: 6,
+                                    message: 'Password must be 6 characters or longer'
+                                },
+                                pattern: {
+                                    value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/,
+                                    message: 'Password must have uppercase, number and special characters'
+                                }
+                            })}
+                            type={passwordShown ? "text" : "password"} className="input input-bordered w-full dark:text-black" />
+                        <div onClick={togglePassword}
+                            className="absolute inset-y-0 right-0 pr-3 flex items-center dark:text-black ">
+                            <AiFillEye
+                                className={passwordShown ? 'hidden' : 'block'} />
+                            <AiFillEyeInvisible
+                                className={passwordShown ? 'block' : 'hidden'} />
+                        </div>
+                    </div>
                     {errors.password && <p className="text-red-500 text-sm" role="alert">{errors.password?.message}</p>}
                 </div>
                 <input className='btn btn-accent w-full mt-3' value="SignUp" type="submit" />
             </form>
             <p className="text-sm my-1">Already have an account? <Link className="text-secondary" to="/login">Please Login</Link></p>
             <div className="divider">OR</div>
-            <button onClick={handleGoogleSignIn} className="btn btn-outline w-full">CONTINUE WITH GOOGLE</button>
+            <button onClick={handleGoogleSignIn} className="btn btn-outline w-full dark:text-white">CONTINUE WITH GOOGLE</button>
         </div>
     );
 };
