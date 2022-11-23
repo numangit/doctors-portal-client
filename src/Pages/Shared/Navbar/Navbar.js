@@ -55,11 +55,11 @@ const Navbar = () => {
             user?.uid ?
                 <>
                     <li><Link to="/dashboard">Dashboard</Link></li>
-                    <div class="h-auto m-0 p-0 bg-slate-700 w-[1px]"></div>
+                    <div className="h-auto m-0 p-0 bg-slate-700 w-[1px]"></div>
                     <li><button onClick={handleLogOut}>Sign Out</button></li>
                 </>
                 : <>
-                    <div class="h-auto m-0 p-0 bg-slate-700 w-[1px]"></div>
+                    <div className="h-auto m-0 p-0 bg-slate-700 w-[1px]"></div>
                     <li><Link to="/login">Login</Link></li>
                 </>
         }
