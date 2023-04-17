@@ -6,6 +6,29 @@ import { FaMoon, FaSun } from 'react-icons/fa';
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
 
+    // theme toggle
+//     const [theme, setTheme] = useState(true);
+
+//   useEffect(() => {
+//     const siteTheme = JSON.parse(window.localStorage.getItem("theme"));
+//     const element = document.documentElement;
+//     if (siteTheme) {
+//       element.classList.remove("light");
+//       element.classList.add("dark");
+//       document.body.style.backgroundColor = "#181D31";
+
+//     } else {
+//       element.classList.remove("dark");
+//       element.className = "light";
+//       document.body.style.backgroundColor = "#ffffff";
+//     }
+//   }, [theme]);
+
+// const handleThemeChange = () => {
+//     window.localStorage.setItem("theme", JSON.stringify(theme))
+//     setTheme(!theme);
+//   }
+
     //function to handle logout
     const handleLogOut = () => {
         logOut()
